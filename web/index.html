@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Parser - Extract Resume Information</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>📄 Resume Parser</h1>
+            <p>Upload your resume to extract structured information instantly</p>
+        </header>
+
+        <!-- Upload Section -->
+        <section class="upload-section">
+            <div class="upload-card">
+                <div class="upload-area" id="uploadArea">
+                    <svg class="upload-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                    </svg>
+                    <h3>Drop your resume here</h3>
+                    <p>or click to browse</p>
+                    <p class="file-info">Supports PDF and DOCX files (max 10MB)</p>
+                    <input type="file" id="fileInput" accept=".pdf,.docx" hidden>
+                </div>
+                
+                <div class="file-selected" id="fileSelected" style="display: none;">
+                    <div class="file-details">
+                        <svg class="file-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        <div>
+                            <p class="filename" id="filename"></p>
+                            <p class="filesize" id="filesize"></p>
+                        </div>
+                    </div>
+                    <button class="btn-change" id="changeFile">Change File</button>
+                </div>
+
+                <button class="btn-parse" id="parseBtn" disabled>
+                    <span id="btnText">Parse Resume</span>
+                    <span class="loader" id="loader" style="display: none;"></span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="results-section" id="resultsSection" style="display: none;">
+            <div class="results-header">
+                <h2>📊 Extracted Information</h2>
+                <div class="results-actions">
+                    <button class="btn-download" id="downloadJson">Download JSON</button>
+                    <button class="btn-copy" id="copyData">Copy Data</button>
+                </div>
+            </div>
+
+            <div class="results-grid">
+                <!-- Personal Information -->
+                <div class="result-card">
+                    <h3>👤 Personal Information</h3>
+                    <div class="info-row">
+                        <span class="label">Name:</span>
+                        <span class="value" id="name">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Email:</span>
+                        <span class="value" id="email">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Phone:</span>
+                        <span class="value" id="phone">-</span>
+                    </div>
+                </div>
+
+                <!-- Skills -->
+                <div class="result-card full-width">
+                    <h3>💡 Skills</h3>
+                    <div class="skills-container" id="skillsContainer">
+                        <p class="no-data">No skills detected</p>
+                    </div>
+                </div>
+
+                <!-- Education -->
+                <div class="result-card full-width">
+                    <h3>🎓 Education</h3>
+                    <div class="list-container" id="educationContainer">
+                        <p class="no-data">No education information found</p>
+                    </div>
+                </div>
+
+                <!-- Experience -->
+                <div class="result-card full-width">
+                    <h3>💼 Work Experience</h3>
+                    <div class="list-container" id="experienceContainer">
+                        <p class="no-data">No work experience found</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Error Message -->
+        <div class="error-message" id="errorMessage" style="display: none;"></div>
+
+        <!-- Footer -->
+        <footer>
+            <p>Built with FastAPI, spaCy, and vanilla JavaScript</p>
+            <p class="note">Note: Works best with English resumes in standard formats</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
